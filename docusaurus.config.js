@@ -23,7 +23,7 @@ module.exports = {
           position: 'left',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
-        {to: 'license/', label: 'License', position: 'left'},
+        // {to: 'license/', label: 'License', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
