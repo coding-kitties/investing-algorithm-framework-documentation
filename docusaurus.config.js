@@ -12,7 +12,7 @@ module.exports = {
     navbar: {
       title: 'Investing Algorithm Framework',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Coding Kitties',
         src: 'img/logo.svg',
       },
       items: [
@@ -25,7 +25,7 @@ module.exports = {
         {to: 'blog', label: 'Blog', position: 'left'},
         // {to: 'license/', label: 'License', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/coding-kitties/investing-algorithm-framework',
           label: 'GitHub',
           position: 'right',
         },
@@ -78,7 +78,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Coding Kitties, Investing Algorithm Framework`,
     },
   },
   presets: [
