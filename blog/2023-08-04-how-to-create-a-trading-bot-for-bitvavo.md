@@ -1,5 +1,5 @@
 ---
-slug: first-blog-post
+slug: how-to-create-a-trading-bot-for-bitvavo
 title: How to create a trading bot for bitvavo
 authors:
     name: Marc van Duyn

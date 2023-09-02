@@ -1,5 +1,5 @@
 ---
-slug: first-blog-post
+slug: hot-to-create-a-trading-bot-for-binance
 title: How to create a trading bot for binance
 authors:
   name: Marc van Duyn
