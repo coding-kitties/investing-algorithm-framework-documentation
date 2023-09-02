@@ -41,6 +41,6 @@ config = {
         }
     },
 }
-logging.config.dictConfig(config)`
+logging.config.dictConfig(config)
 ```
 
