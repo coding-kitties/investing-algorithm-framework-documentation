@@ -13,6 +13,10 @@ const sidebars = {
                     type: 'doc',
                     id: 'Getting Started/application-setup',
                 },
+                {
+                    type: 'doc',
+                    id: 'Getting Started/strategies',
+                },
             ],
         },
         {

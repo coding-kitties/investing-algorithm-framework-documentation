@@ -1,114 +1,45 @@
-[//]: # (---)
+---
+sidebar_position: 4
+---
+Strategies are the core of the framework. They are the main entry point for the framework. 
+Strategies are used to define the trading logic of your algorithm. In your strategy you can use the algorithm object to
+place orders, get orders, get the current balance and more.
 
-[//]: # (sidebar_position: 4)
+When defining a strategy you need to define the following things:
 
-[//]: # (---)
+- The time unit of the strategy (second, minute, hour, day, week, month)
+- The interval of the strategy (how often the strategy should run within the time unit)
 
-[//]: # ()
-[//]: # (# Strategies)
+The framework comes with two ways to define a strategy.
 
-[//]: # (With the framework you can define a trading strategy in a couple of ways. )
+- Class based strategies
+- Decorator strategies
 
-[//]: # ()
-[//]: # ()
-[//]: # (## Class based strategy)
+## Class based strategy
 
-[//]: # ()
-[//]: # (```python)
 
-[//]: # (from investing_algorithm_framework import create_app, PortfolioConfiguration, \)
+```python
+from investing_algorithm_framework import TimeUnit, TradingStrategy, Algorithm
 
-[//]: # (TimeUnit, TradingTimeFrame, TradingDataType, TradingStrategy, Algorithm)
+app = create_app()
 
-[//]: # ()
-[//]: # (class MyTradingStrategy&#40;TradingStrategy&#41;:)
+class MyTradingStrategy(TradingStrategy):
+    time_unit = TimeUnit.SECOND # The time unit of the strategy
+    interval = 5 # The interval of the strategy, runs every 5 seconds
 
-[//]: # (    time_unit = TimeUnit.SECOND)
+    def apply_strategy(self, algorithm: Algorithm, market_data: Dict[str, Any]):
+        pass
+        
+app.register_strategy(MyTradingStrategy)
+```
 
-[//]: # (    interval = 5)
+## Decorator strategy
 
-[//]: # (    trading_data_type = TradingDataType.OHLCV)
+```python
+from investing_algorithm_framework import create_app, TimeUnit, Algorithm
 
-[//]: # (    trading_time_frame_start_date = datetime.utcnow&#40;&#41; - timedelta&#40;days=1&#41;)
-
-[//]: # (    trading_time_frame = TradingTimeFrame.ONE_MINUTE)
-
-[//]: # (    market = "BITVAVO")
-
-[//]: # (    symbols = ["BTC/EUR"])
-
-[//]: # ()
-[//]: # (    def apply_strategy&#40;)
-
-[//]: # (        self,)
-
-[//]: # (        algorithm: Algorithm,)
-
-[//]: # (        market_data,)
-
-[//]: # (    &#41;:)
-
-[//]: # (        print&#40;len&#40;algorithm.get_orders&#40;&#41;&#41;&#41;)
-
-[//]: # (        print&#40;market_data&#41;)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (## Decorator strategy)
-
-[//]: # (```python)
-
-[//]: # (from investing_algorithm_framework import create_app, PortfolioConfiguration, \)
-
-[//]: # (TimeUnit, TradingTimeFrame, TradingDataType, TradingStrategy, Algorithm)
-
-[//]: # ()
-[//]: # (@app.strategy&#40;)
-
-[//]: # (    time_unit=TimeUnit.SECOND,)
-
-[//]: # (    interval=5,)
-
-[//]: # (    market="BITVAVO",)
-
-[//]: # (    trading_data_types=[TradingDataType.OHLCV, TradingDataType.TICKER],)
-
-[//]: # (    trading_time_frame=TradingTimeFrame.ONE_DAY,)
-
-[//]: # (    symbols=["BTC/EUR"],)
-
-[//]: # (    trading_time_frame_start_date=datetime.now&#40;&#41; - timedelta&#40;days=60&#41;,)
-
-[//]: # (&#41;)
-
-[//]: # (def perform_strategy&#40;algorithm: Algorithm, market_data&#41;:)
-
-[//]: # (    print&#40;algorithm.get_portfolio&#40;&#41;&#41;)
-
-[//]: # (    print&#40;algorithm.get_positions&#40;&#41;&#41;)
-
-[//]: # (    print&#40;algorithm.get_orders&#40;&#41;&#41;)
-
-[//]: # (    print&#40;market_data&#41;)
-
-[//]: # (    )
-[//]: # (        if algorithm.position_exists&#40;"<symbol>"&#41;:)
-
-[//]: # (            algorithm.close_position&#40;"<symbol>"&#41;)
-
-[//]: # (        else:)
-
-[//]: # (            algorithm.create_limit_order&#40;)
-
-[//]: # (                symbol="<symbol>",)
-
-[//]: # (                side="buy",)
-
-[//]: # (                percentage_portfolio=20,)
-
-[//]: # (                price=market_data["tickers"]["<symbol>"]["bid"])
-
-[//]: # (            &#41;)
-
-[//]: # (```)
+# Runs every 5 seconds
+@app.strategy(time_unit=TimeUnit.SECOND, interval=5)
+def perform_strategy(algorithm: Algorithm, market_data: Dict[str, Any]):
+    pass
+```
