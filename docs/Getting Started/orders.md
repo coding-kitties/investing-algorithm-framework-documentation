@@ -1,195 +1,174 @@
-[//]: # (---)
+---
+sidebar_position: 5
+---
 
-[//]: # (sidebar_position: 5)
+# Orders
+In this section we will discuss how to create, retrieve and list orders.
+The orders of your trading bot are centrally managed by the algorithm component.
+In your strategy you can create orders, retrieve orders and list orders through the algorithm component.
+The following orders are supported by the framework:
 
-[//]: # (---)
+* Limit buy orders
+* Limit sell orders
+* Market sell orders
 
-[//]: # ()
-[//]: # (# Orders )
 
-[//]: # ()
-[//]: # (The following orders are supported:)
+## Creating limit buy order
+You can create orders by using the following methods of the framework
 
-[//]: # ()
-[//]: # (* Limit buy orders)
+```python
+from investing_algortihm_framework import OrderSide
 
-[//]: # (* Limit sell orders)
+@app.strategy(time_unit=TimeUnit.SECOND, interval=5)
+def perform_strategy(algorithm: Algorithm, market_data: Dict[str, Any]):
+    algorithm.create_limit_order(
+        symbol="<symbol>", # E.g BTC
+        side=OrderSide.BUY, # or "buy"
+        amount=20,
+        price=10
+    )
+```
 
-[//]: # (* Market sell orders)
+### Creating a limit buy order based on a percentage of your portfolio
+```python
+from investing_algortihm_framework import OrderSide
 
-[//]: # ()
-[//]: # (## Creating an order)
+@app.strategy(time_unit=TimeUnit.SECOND, interval=5)
+def perform_strategy(algorithm: Algorithm, market_data: Dict[str, Any]):
+    algorithm.create_limit_order(
+        symbol="<symbol>", # E.g BTC 
+        side=OrderSide.BUY, # or "buy"
+        price=10,
+        percentage_of_portfolio=20 # Invest 20% of your portfolio unallocated funds
+    )
+```
 
-[//]: # (You can create orders by using the following methods of the framework)
 
-[//]: # ()
-[//]: # (### Creating a limit buy order)
+## Creating a limit sell order
 
-[//]: # (```python)
+```python
+from investing_algortihm_framework import OrderSide
 
-[//]: # (from investing_algortihm_framework import OrderSide)
+@app.strategy(time_unit=TimeUnit.SECOND, interval=5)
+def perform_strategy(algorithm: Algorithm, market_data: Dict[str, Any]):
+    algorithm.create_limit_order(
+        symbol="<symbol>", # E.g BTC
+        side=OrderSide.SELL, # or "sell"
+        price=10,
+        amount=20
+    )
+```
 
-[//]: # ()
-[//]: # (algorithm.create_limit_order&#40;)
 
-[//]: # (    symbol="<symbol>",)
+### Creating a limit sell order based on a percentage of your position
+```python
+from investing_algortihm_framework import OrderSide
 
-[//]: # (    side=OrderSide.BUY,)
+@app.strategy(time_unit=TimeUnit.SECOND, interval=5)
+def perform_strategy(algorithm: Algorithm, market_data: Dict[str, Any]):
+    algorithm.create_limit_order(
+        symbol="<symbol>", # E.g BTC  
+        side=OrderSide.SELL, # or "sell"
+        price=10,
+        percentage_of_position=20 # Sell 20% of your position of the given symbol
+    )
+```
 
-[//]: # (    amount=20,)
+### Closing a position with a limit sell order
+```python
+from investing_algortihm_framework import OrderSide
 
-[//]: # (    price=10)
+@app.strategy(time_unit=TimeUnit.SECOND, interval=5)
+def perform_strategy(algorithm: Algorithm, market_data: Dict[str, Any]):
+    algorithm.close_position(<symbol>) # E.g BTC close your BTC position
+```
 
-[//]: # (&#41;)
+## Retrieving an order
 
-[//]: # (```)
+You can retrieve an order by using the `get_order` method of your algorithm component.
 
-[//]: # ()
-[//]: # (### Creating a limit sell order)
 
-[//]: # (```python)
 
-[//]: # (algorithm.create_limit_order&#40;)
+### Retrieving an order by reference id
 
-[//]: # (    symbol="<symbol>",)
+You can retrieve an order by the id provided to you by the brokder/exchange. You can do this in
 
-[//]: # (    side=OrderSide.SELL,)
+the following way:
 
-[//]: # (    amount=20,)
+```python
 
-[//]: # (    price=10)
+algorithm.get_order(self, reference_id=<your broker/exchange reference id>)
 
-[//]: # (&#41;)
+```
 
-[//]: # (```)
 
-[//]: # ()
-[//]: # (### Creating a market sell order)
+### Retrieving an order other parameters
 
-[//]: # (```python)
+You can retrieve an order by symbol and market in the following way.
 
-[//]: # (algorithm.create_market_order&#40;)
 
-[//]: # (    symbol="<symbol>",)
+:::warning Multiple orders mismatch
 
-[//]: # (    side=OrderSide.SELL,)
 
-[//]: # (    amount=20,)
+Keep in mind that when there exist multiple order for a given symbol and market that you will
 
-[//]: # (&#41;)
+likely not retrieve the order you are looking for.
 
-[//]: # (```)
 
-[//]: # ()
-[//]: # (### Creating an order by portfolio percentage)
+:::
 
-[//]: # (For limit buy order you can specify a portfolio percentage, so the buy order will take a size )
 
-[//]: # (relative to the size of you portfolio. You can do this in the following way:)
+```python
 
-[//]: # (```python)
+algorithm.get_order(
 
-[//]: # (algorithm.create_limit_order&#40;)
+    market=<market e.g. binance, bitvavo>,
 
-[//]: # (    symbol="<symbol>",)
+    target_symbol=<target symbol e.g. btc, dot>,
 
-[//]: # (    side="buy",)
+    trading_symbol=<trading symbol e.g. eur>,
 
-[//]: # (    percentage_portfolio=20,)
+    side=<order side e.g. SELL, BUY>,
 
-[//]: # (    price=10)
+    type=<order type e.g. LIMIT, MARKET>,
 
-[//]: # (&#41;)
+)
 
-[//]: # (```)
+```
 
-[//]: # ()
-[//]: # (## Retrieving an order)
+## Listing all orders
 
-[//]: # (You can retrieve an order by using the `get_order` method of your algorithm component.)
+You can retrieve an order by using the `get_orders` method of your algorithm component.
 
-[//]: # ()
-[//]: # ()
-[//]: # (### Retrieving an order by reference id)
 
-[//]: # (You can retrieve an order by the id provided to you by the brokder/exchange. You can do this in)
+```python
 
-[//]: # (the following way:)
+algorithm.get_orders(
 
-[//]: # (```python)
+    market=<market e.g. binance, bitvavo>,
 
-[//]: # (algorithm.get_order&#40;self, reference_id=<your broker/exchange reference id>&#41;)
+    target_symbol=<target symbol e.g. btc, dot>,
 
-[//]: # (```)
+    trading_symbol=<trading symbol e.g. eur>,
 
-[//]: # ()
-[//]: # (### Retrieving an order other parameters)
+    side=<order side e.g. SELL, BUY>,
 
-[//]: # (You can retrieve an order by symbol and market in the following way.)
+    type=<order type e.g. LIMIT, MARKET>,
 
-[//]: # ()
-[//]: # (:::warning Multiple orders mismatch)
+)
 
-[//]: # ()
-[//]: # (Keep in mind that when there exist multiple order for a given symbol and market that you will)
+```
 
-[//]: # (likely not retrieve the order you are looking for.)
 
-[//]: # ()
-[//]: # (:::)
+## Checking pending orders
 
-[//]: # ()
-[//]: # (```python)
+You can check the status of your oders by using the `check_pending_orders` method of 
 
-[//]: # (algorithm.get_order&#40;)
+your algorithm component.
 
-[//]: # (    market=<market e.g. binance, bitvavo>,)
 
-[//]: # (    target_symbol=<target symbol e.g. btc, dot>,)
+```python
 
-[//]: # (    trading_symbol=<trading symbol e.g. eur>,)
+algorithm.check_pending_orders()
 
-[//]: # (    side=<order side e.g. SELL, BUY>,)
-
-[//]: # (    type=<order type e.g. LIMIT, MARKET>,)
-
-[//]: # (&#41;)
-
-[//]: # (```)
-
-[//]: # (## Listing all orders)
-
-[//]: # (You can retrieve an order by using the `get_orders` method of your algorithm component.)
-
-[//]: # ()
-[//]: # (```python)
-
-[//]: # (algorithm.get_orders&#40;)
-
-[//]: # (    market=<market e.g. binance, bitvavo>,)
-
-[//]: # (    target_symbol=<target symbol e.g. btc, dot>,)
-
-[//]: # (    trading_symbol=<trading symbol e.g. eur>,)
-
-[//]: # (    side=<order side e.g. SELL, BUY>,)
-
-[//]: # (    type=<order type e.g. LIMIT, MARKET>,)
-
-[//]: # (&#41;)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (## Checking pending orders)
-
-[//]: # (You can check the status of your oders by using the `check_pending_orders` method of )
-
-[//]: # (your algorithm component.)
-
-[//]: # ()
-[//]: # (```python)
-
-[//]: # (algorithm.check_pending_orders&#40;&#41;)
-
-[//]: # (```)
+```

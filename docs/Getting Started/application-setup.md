@@ -56,7 +56,7 @@ app = create_app(config={RESOURCE_DIRECTORY: pathlib.Path(__file__).parent.resol
 ```
 
 
-### Rest API plugin
+## Rest API plugin
 To run the framework in a rest api setup, you need to specify a port to run the rest api on. 
 The following code snippet shows how to do this:
 

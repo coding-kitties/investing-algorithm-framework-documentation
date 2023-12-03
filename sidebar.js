@@ -21,6 +21,14 @@ const sidebars = {
                     type: 'doc',
                     id: 'Getting Started/market-data',
                 },
+                {
+                    type: 'doc',
+                    id: 'Getting Started/orders',
+                },
+                {
+                    type: 'doc',
+                    id: 'Getting Started/positions',
+                },
             ],
         },
         {

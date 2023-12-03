@@ -7,13 +7,14 @@ To get market data in your trading bot, you need to register a market data sourc
 The framework comes with a couple of market data sources out of the box. You can also create your own market data source.
 
 
-The framework comes with the following market data sources:
+## CCXT market data sources
+The framework comes with the following ccxt market data sources:
 
 - CCXTTickerMarketDataSource  
 - CCXTOHLCVMarketDataSource  
 - CCXTOrderBookMarketDataSource  
 
-## CCXTTickerMarketDataSource
+### CCXTTickerMarketDataSource
 The CCXTTickerMarketDataSource is used to get the latest ticker data for a symbol. It is based 
 on the popular [ccxt](https://github.com/ccxt/ccxt) library.
     
@@ -38,7 +39,7 @@ class MyTradingStrategy(TradingStrategy):
         print(market_data[bitvavo_ticker_btc_eur.get_identifier()])
 ```
 
-## CCXTOHLCVMarketDataSource
+### CCXTOHLCVMarketDataSource
 The CCXTOHLCVMarketDataSource is used to get candle stick/OHLCV data for a symbol. It is based
 on the popular [ccxt](https://github.com/ccxt/ccxt) library.
 
@@ -73,8 +74,7 @@ class MyTradingStrategy(TradingStrategy):
         print(market_data[bitvavo_btc_eur_ohlcv_2h.get_identifier()])
 ```
 
-
-## CCXTOrderBookMarketDataSource
+### CCXTOrderBookMarketDataSource
 The CCXTOrderBookMarketDataSource is used to get order book data for a symbol. It is based
 on the popular [ccxt](https://github.com/ccxt/ccxt) library.
 

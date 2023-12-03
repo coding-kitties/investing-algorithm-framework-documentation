@@ -1,17 +1,15 @@
-[//]: # (---)
+---
+sidebar_position: 6
+---
 
-[//]: # (sidebar_position: 6)
 
-[//]: # (---)
+# Positions
 
-[//]: # ()
-[//]: # (# Positions)
 
-[//]: # ()
-[//]: # (## Retrieving a position)
+## Retrieving a position
 
-[//]: # ()
-[//]: # (## Listing positions)
 
-[//]: # ()
-[//]: # (## Closing position)
+## Listing positions
+
+
+## Closing position
