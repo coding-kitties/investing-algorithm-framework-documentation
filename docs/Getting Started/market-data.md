@@ -1,7 +1,5 @@
 ---
-
 sidebar_position: 7
-
 ---
 
 # Market data
@@ -23,7 +21,7 @@ on the popular [ccxt](https://github.com/ccxt/ccxt) library.
 from investing_algorithm_framework import CCXTTickerMarketDataSource, TradingStrategy, \
     Algorithm, TimeUnit
 
-# A ticker market data source for the BTC/EUR symbol on the BITVAVO exchange
+# A ohlcv market data source for the BTC/EUR symbol on the BITVAVO exchange
 bitvavo_ticker_btc_eur = CCXTTickerMarketDataSource(
     identifier="BTC-ticker",
     market="BITVAVO",
@@ -58,13 +56,11 @@ everytime the strategy runs.
 from investing_algorithm_framework import CCXTOHLCVMarketDataSource, TradingStrategy, \
     Algorithm, TimeUnit
 
-# A ticker market data source for the BTC/EUR symbol on the BITVAVO exchange
-bitvavo_btc_eur_ohlcv_2h = CCXTOHLCVMarketDataSource(
-    identifier="BTC-ohlcv",
+# A order book market data source for the BTC/EUR symbol on the BITVAVO exchange
+bitvavo_btc_eur_ohlcv_2h = CCXTTickerMarketDataSource(
+    identifier="BTC-ohlcv-2h",
     market="BITVAVO",
     symbol="BTC/EUR",
-    timeframe="2h",
-    start_date=datetime.utcnow() - timedelta(days=17)
 )
 
 class MyTradingStrategy(TradingStrategy):
@@ -74,5 +70,32 @@ class MyTradingStrategy(TradingStrategy):
     market_data_sources = [bitvavo_btc_eur_ohlcv_2h]
 
     def apply_strategy(self, algorithm: Algorithm, market_data: Dict[str, Any]):
-        print(market_data[bitvavo_ticker_btc_eur.get_identifier()])
+        print(market_data[bitvavo_btc_eur_ohlcv_2h.get_identifier()])
+```
+
+
+## CCXTOrderBookMarketDataSource
+The CCXTOrderBookMarketDataSource is used to get order book data for a symbol. It is based
+on the popular [ccxt](https://github.com/ccxt/ccxt) library.
+
+
+```python
+from investing_algorithm_framework import CCXTOrderBookMarketDataSource, TradingStrategy, \
+    Algorithm, TimeUnit
+
+# A ticker market data source for the BTC/EUR symbol on the BITVAVO exchange
+bitvavo_btc_eur_order_book = CCXTOrderBookMarketDataSource(
+    identifier="BTC-order-book",
+    market="BITVAVO",
+    symbol="BTC/EUR",
+)
+
+class MyTradingStrategy(TradingStrategy):
+    time_unit = TimeUnit.SECOND # The time unit of the strategy
+    interval = 5 # The interval of the strategy, runs every 5 seconds
+    # Registering the market data source
+    market_data_sources = [bitvavo_btc_eur_order_book]
+
+    def apply_strategy(self, algorithm: Algorithm, market_data: Dict[str, Any]):
+        print(market_data[bitvavo_btc_eur_order_book.get_identifier()])
 ```
