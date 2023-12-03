@@ -152,7 +152,7 @@ def perform_strategy(algorithm: Algorithm, market_data: Dict[str, Any]):
 You can retrieve an order by symbol and market in the following way.
 
 
-:::warning Multiple orders mismatch
+:::info Multiple orders mismatch
 Keep in mind that when there exist multiple orders for a given symbol or market, you will
 likely not retrieve the order you are looking for. It is probably better to retrieve the order by reference id or list all 
 orders and filter the order you are looking for.
@@ -195,7 +195,7 @@ You can check the status of your orders by using the `check_pending_orders` meth
 The framework will automatically update the status of your order if it has been changed by the broker or exchange. This
 means that the filled, remaining, status and order fee attributes of your order will be updated.
 
-:::warning Pending orders are checked automatically
+:::info Pending orders are checked automatically
 The framework will automatically check your pending orders every time your strategy runs. This means that you don't have to 
 call the `check_pending_orders` method of your algorithm component in your strategy. This method is only useful if you want to
 check the status of your orders in between strategy runs (e.g. in a recurring [task](/tasks) you define or when you 
