@@ -35,7 +35,7 @@ class MyTradingStrategy(TradingStrategy):
 app.register_strategy(MyTradingStrategy)
 ```
 
-## Decorator strategy
+## Decorator based strategy
 
 ```python
 from investing_algorithm_framework import create_app, TimeUnit, Algorithm
