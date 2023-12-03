@@ -153,7 +153,7 @@ You can retrieve an order by symbol and market in the following way.
 
 
 :::warning Multiple orders mismatch
-Keep in mind that when there exist multiple order for a given symbol and market that you will
+Keep in mind that when there exist multiple orders for a given symbol or market, you will
 likely not retrieve the order you are looking for. It is probably better to retrieve the order by reference id or list all 
 orders and filter the order you are looking for.
 :::
