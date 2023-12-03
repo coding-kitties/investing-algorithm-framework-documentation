@@ -4,7 +4,6 @@ sidebar_position: 2
 
 ---
 
-
 # Application Setup
 The framework allows you to configure different application setups. Currently the following configurations are supported:
 

@@ -1,6 +1,8 @@
 ---
 sidebar_position: 4
 ---
+# Strategies
+
 Strategies are the core of the framework. They are the main entry point for the framework. 
 Strategies are used to define the trading logic of your algorithm. In your strategy you can use the algorithm object to
 place orders, get orders, get the current balance and more.
