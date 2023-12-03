@@ -15,8 +15,29 @@ example, you can have a sqllite database and a REST API enabled.
 :::
 
 
-## In-memory Setup
+## The algorithm component
+During usage of the framework the algorithm object is you way to interact with your trading 
+bot. This object allows you to create orders, list positions, sync with your portfolio on your broker/exchange, etc.
 
+You will access your algorithm component in different ways, but in all setups it will
+be provided to you by the framework. For example in the code snippet below the algorithm object 
+is passed in as a parameter in the function by the framework
+
+```python
+from investing_algorithm_framework import create_app, PortfolioConfiguration, \
+TimeUnit, TradingTimeFrame, TradingDataType, TradingStrategy, Algorithm
+
+@app.strategy(time_unit=TimeUnit.SECOND, interval=5)
+def perform_strategy(algorithm: Algorithm, market_data):
+    print(algorithm.get_portfolio())
+    print(algorithm.get_positions())
+    print(algorithm.get_orders())
+        
+app.start()
+```
+
+ 
+## In-memory Setup
 The in-memory setup is the default setup.
 It is used to run the framework in a single process and without any persistence.
 This setup is useful for testing and debugging purposes.
@@ -26,7 +47,6 @@ The following code snippet shows how to do this:
 
 ```python
 from investing_algorithm_framework import create_app
-
 app = create_app()
 ```
 
@@ -42,7 +62,6 @@ Use stateless setup when running the framework in a cloud function such as AWS L
 
 ```python
 from investing_algorithm_framework import create_app
-
 app = create_app(stateless=True)
 ```
 
@@ -52,7 +71,6 @@ you algorithm to store the database in. The following code snippet shows how to 
 
 ```python
 import pathlib
-
 from investing_algorithm_framework import create_app, RESOURCE_DIRECTORY
 
 # Create the resource directory in the parent directory of the current file

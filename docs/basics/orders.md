@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 # Orders 
@@ -8,71 +8,101 @@ The following orders are supported:
 
 * Limit buy orders
 * Limit sell orders
-* 
-:::tip Multiple features enabled
+* Market sell orders
 
-Keep in mind that you can have multiple features enabled in the same application. For
-example, you can have a sqllite database and a REST API enabled.
+## Creating an order
+You can create orders by using the following methods of the framework
+
+### Creating a limit buy order
+```python
+from investing_algortihm_framework import OrderSide
+
+algorithm.create_limit_order(
+    symbol="<symbol>",
+    side=OrderSide.BUY,
+    amount=20,
+    price=10
+)
+```
+
+### Creating a limit sell order
+```python
+algorithm.create_limit_order(
+    symbol="<symbol>",
+    side=OrderSide.SELL,
+    amount=20,
+    price=10
+)
+```
+
+### Creating a market sell order
+```python
+algorithm.create_market_order(
+    symbol="<symbol>",
+    side=OrderSide.SELL,
+    amount=20,
+)
+```
+
+### Creating an order by portfolio percentage
+For limit buy order you can specify a portfolio percentage, so the buy order will take a size 
+relative to the size of you portfolio. You can do this in the following way:
+```python
+algorithm.create_limit_order(
+    symbol="<symbol>",
+    side="buy",
+    percentage_portfolio=20,
+    price=10
+)
+```
+
+## Retrieving an order
+You can retrieve an order by using the `get_order` method of your algorithm component.
+
+
+### Retrieving an order by reference id
+You can retrieve an order by the id provided to you by the brokder/exchange. You can do this in
+the following way:
+```python
+algorithm.get_order(self, reference_id=<your broker/exchange reference id>)
+```
+
+### Retrieving an order other parameters
+You can retrieve an order by symbol and market in the following way.
+
+:::warning Multiple orders mismatch
+
+Keep in mind that when there exist multiple order for a given symbol and market that you will
+likely not retrieve the order you are looking for.
 
 :::
 
-
-## In-memory Setup
-
-The in-memory setup is the default setup.
-It is used to run the framework in a single process and without any persistence.
-This setup is useful for testing and debugging purposes.
-
-To configure the application with in-memory setup, simply don't pass any arguments to the `create_app` method.
-The following code snippet shows how to do this:
+```python
+algorithm.get_order(
+    market=<market e.g. binance, bitvavo>,
+    target_symbol=<target symbol e.g. btc, dot>,
+    trading_symbol=<trading symbol e.g. eur>,
+    side=<order side e.g. SELL, BUY>,
+    type=<order type e.g. LIMIT, MARKET>,
+)
+```
+## Listing all orders
+You can retrieve an order by using the `get_orders` method of your algorithm component.
 
 ```python
-from investing_algorithm_framework import create_app
-
-app = create_app()
+algorithm.get_orders(
+    market=<market e.g. binance, bitvavo>,
+    target_symbol=<target symbol e.g. btc, dot>,
+    trading_symbol=<trading symbol e.g. eur>,
+    side=<order side e.g. SELL, BUY>,
+    type=<order type e.g. LIMIT, MARKET>,
+)
 ```
 
-## Stateless Setup
-To run the framework in a stateless setup, you need to set the stateless flag to `True` when calling the `create_app` method.
-The following code snippet shows how to do this:
-
-:::tip Cloud functions
-
-Use stateless setup when running the framework in a cloud function such as AWS Lambda or Azure Cloud Functions.
-
-:::
+## Checking pending orders
+You can check the status of your oders by using the `check_pending_orders` method of 
+your algorithm component.
 
 ```python
-from investing_algorithm_framework import create_app
-
-app = create_app(stateless=True)
+algorithm.check_pending_orders()
 ```
-
-## SQLlite Setup
-To run the framework in a SQLlite setup, so you have persitance in your algorithm, you need to specify a resource directory for
-you algorithm to store the database in. The following code snippet shows how to do this:
-
-```python
-import pathlib
-
-from investing_algorithm_framework import create_app, RESOURCE_DIRECTORY
-
-# Create the resource directory in the parent directory of the current file
-app = create_app(config={RESOURCE_DIRECTORY: pathlib.Path(__file__).parent.resolve()})
-```
-
-## Rest API Setup
-To run the framework in a rest api setup, you need to specify a port to run the rest api on. The following code snippet shows how to do this:
-
-```python
-from investing_algorithm_framework import create_app
-app = create_app(web=True)
-```
-
-Or if you want to specify the port you can specify this in the config class.
-
-```python
-from investing_algorithm_framework import create_app, REST_API_PORT
-app = create_app({REST_API_PORT: 3000}, web=True)
-```
-

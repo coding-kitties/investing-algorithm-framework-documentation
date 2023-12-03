@@ -120,7 +120,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Investing algorithm framework. Built by Coding Kitties`,
       },
       prism: {
         theme: lightCodeTheme,
