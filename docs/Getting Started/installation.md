@@ -2,9 +2,13 @@
 sidebar_position: 1
 ---
 
-# Installation
 
+# Installation
 You can install the framework using the following command:
+
+:::info
+Python 3 or higher is required.
+:::
 
 ```bash
 pip install investing-algorithm-framework
