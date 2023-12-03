@@ -15,6 +15,10 @@ const sidebars = {
                 },
                 {
                     type: 'doc',
+                    id: 'Getting Started/portfolio-configuration',
+                },
+                {
+                    type: 'doc',
                     id: 'Getting Started/strategies',
                 },
                 {
@@ -28,6 +32,14 @@ const sidebars = {
                 {
                     type: 'doc',
                     id: 'Getting Started/positions',
+                },
+                {
+                    type: 'doc',
+                    id: 'Getting Started/trades',
+                },
+                {
+                    type: 'doc',
+                    id: 'Getting Started/tasks',
                 },
             ],
         },
