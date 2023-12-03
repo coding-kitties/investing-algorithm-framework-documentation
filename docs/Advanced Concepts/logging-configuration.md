@@ -3,8 +3,14 @@ sidebar_position: 1
 ---
 
 # Logging configuration
-
 The following code snippet shows how to setup a baseline configuration for logging in your application.
+
+:::info Multiple orders mismatch
+We didn't want to introduce a custom logging configuration when creating the framework, 
+so we use the default logging configuration of Python. The code snippet below shows how to configure the logging 
+through Python's standard logging configuration. You can use this as a baseline configuration for your application.
+:::
+
 
 > Notice the explicit logger for the investing_algorithm_framework package. This is required to ensure
 that the framework logs are not suppressed by the root logger. You can change the logging level to
