@@ -10,7 +10,7 @@ Welcome to the Investing Algorithm Framework documentation!
 ## Getting Started
 
 The Investing Algorithm Framework is a Python framework for developing and backtesting investing algorithms.
-The best way to get started is to follow the [tutorial](/blog/how-to-create-a-trading-bot).
+The best way to get started is to follow the [tutorial](/blog/how-to-create-a-trading-bot-in-5-steps).
 
 After that, you can read the [basics](/docs/Getting%20Started/application-setup.md) to learn more about the framework.
 
@@ -32,4 +32,4 @@ If you find a bug or have a feature request, please create an issue on [GitHub](
 
 ### Helping with the project roadmap
 If you want to contribute to the project roadmap, please take a look at the [project board](https://github.com/coding-kitties/investing-algorithm-framework/projects?query=is%3Aopen).
-You can pick up a taks by assigning yourself to it. 
+You can pick up a task by assigning yourself to it. 
