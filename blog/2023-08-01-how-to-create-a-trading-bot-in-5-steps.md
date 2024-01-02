@@ -17,13 +17,13 @@ In this guide we will walk you through the four steps of building a trading bot,
 > If you are interested in using a trading bot, but do not want to build one yourself or if you would like to
 > make you trading bot available for other to use, you can check out [Finterion](https://finterion.com).
 
-# 1 Choosing the right framework
+## 1 Choosing the right framework
 There are a many libraries, packages and resources available to build a trading bot. To find the right
 tools for you consider looking at the following list of [resources](https://wilsonfreitas.github.io/awesome-quant/).
 For this blog we will use the [Investing algorithm framework](https://github.com/coding-kitties/investing-algorithm-framework).
 This is a Python based framework that allows you to build your own trading bot. It is open-source and free to use.
 
-# 2 Creating a trading bot with the investing algorithm framework
+## 2 Creating a trading bot with the investing algorithm framework
 The investing algorithm framework has various options to build your own trading bot and implement a strategy.
 Some key questions to consider when building your strategy are:
 
@@ -37,14 +37,14 @@ For our trading bot we would like to implement a simple strategy that buys and s
 bitcoin based on a set of simple indicators. The strategy will run every 2 hours. This means that every 2 hours the bot will
 check the price of bitcoin and decide whether to buy or sell.
 
-## 2.1 Setting up the trading bot
+### 2.1 Setting up the trading bot
 To set up the trading bot, we first need to install the investing algorithm framework.
 
 ```bash
 pip install investing-algorithm-framework
 ```
 
-## 2.2 Specifying our market data
+### 2.2 Specifying our market data
 Next, we need specify how often our trading bot runs and which market data it's going to use.
 The investing algorithm framework supports various types of market data. For this example we will use the
 historical price data of bitcoin in candle stick format. In trading terms this is called
@@ -73,7 +73,7 @@ bitvavo_btc_eur_ticker = CCXTTickerMarketDataSource(
 )
 ```
 
-## 2.3 Specifying our trading strategy
+### 2.3 Specifying our trading strategy
 Now that we have set up the market data sources for our trading bot, we can implement the trading strategy. For this example we will
 implement a simple strategy that buys bitcoin when there is a golden cross between a fast and slow moving average.
 The golden cross is a bullish signal that occurs when the short-term (fast) moving average crosses
@@ -227,7 +227,7 @@ class GoldenCrossDeathCrossTradingStrategy(TradingStrategy):
                 )
 ```
 
-# 3 Testing our trading strategy
+## 3 Testing our trading strategy
 Now that we have implemented our trading strategy we can test it. To test our strategy we will use the
 backtesting functionality of the investing algorithm framework. This allows us to test our strategy on historical data.
 
