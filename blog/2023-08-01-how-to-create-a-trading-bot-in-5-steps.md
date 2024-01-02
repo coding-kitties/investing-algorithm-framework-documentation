@@ -17,13 +17,13 @@ In this guide we will walk you through the four steps of building a trading bot,
 > If you are interested in using a trading bot, but do not want to build one yourself or if you would like to
 > make you trading bot available for other to use, you can check out [Finterion](https://finterion.com).
 
-# 1. Choosing the right framework
+# 1 Choosing the right framework
 There are a many libraries, packages and resources available to build a trading bot. To find the right
 tools for you consider looking at the following list of [resources](https://wilsonfreitas.github.io/awesome-quant/).
 For this blog we will use the [Investing algorithm framework](https://github.com/coding-kitties/investing-algorithm-framework).
 This is a Python based framework that allows you to build your own trading bot. It is open-source and free to use.
 
-# 2. Creating a trading bot with the investing algorithm framework
+# 2 Creating a trading bot with the investing algorithm framework
 The investing algorithm framework has various options to build your own trading bot and implement a strategy.
 Some key questions to consider when building your strategy are:
 
@@ -657,6 +657,3 @@ Also, don't forget to star the [investing algorithm framework](https://github.co
 
 You can follow me on [twitter](https://twitter.com/mduyn) or connect with me on [linkedin](https://twitter.com/marcvanduyn). Also if you
 would like to read upcoming blogs you can subscribe to my [medium account](https://medium.com/@marcvanduyn).
-
-
-
