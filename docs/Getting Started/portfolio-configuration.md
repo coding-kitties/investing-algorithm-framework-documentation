@@ -19,14 +19,36 @@ from investing_algorithm_framework import PortfolioConfiguration, create_app
 app = create_app()
 app.add_portfolio_configuration(
      PortfolioConfiguration(
-         api_key="<your broker api key>",
-         secret_key="<your broker secret key>",
          market="BITVAVO",
          trading_symbol="EUR",
      )
 )
 ```
 
+### Market credentials
+To configure your portfolio you need to specify the market credentials of your broker or exchange.
+The market credentials are used to authenticate with your broker or exchange.
+
+The following code snippet shows how to specify the market credentials:
+
+```python
+from investing_algorithm_framework import PortfolioConfiguration, create_app, MarketCredentials
+
+app = create_app()
+app.add_portfolio_configuration(
+     PortfolioConfiguration(
+         market="BITVAVO",
+         trading_symbol="EUR",
+     )
+)
+app.add_market_credentials(
+    MarketCredentials(
+        market="BITVAVO",
+        api_key=<api_key>,
+        api_secret=<api_secret>
+    )
+)
+```
 
 ### Tracking your portfolio from a specific datetime
 If you want to track your portfolio from a specific datetime, you can use the `track_from` parameter.
@@ -41,8 +63,6 @@ from investing_algorithm_framework import PortfolioConfiguration, create_app
 app = create_app()
 app.add_portfolio_configuration(
      PortfolioConfiguration(
-         api_key="<your broker api key>",
-         secret_key="<your broker secret key>",
          market="BITVAVO",
          trading_symbol="EUR",
          track_from=datetime(2021, 1, 1)
@@ -63,8 +83,6 @@ from investing_algorithm_framework import PortfolioConfiguration, create_app
 app = create_app()
 app.add_portfolio_configuration(
      PortfolioConfiguration(
-         api_key="<your broker api key>",
-         secret_key="<your broker secret key>",
          market="BITVAVO",
          trading_symbol="EUR",
          max_unallocated=1000 # Max unallocated amount of EUR, the rest of your balance of eur will be untouched 
