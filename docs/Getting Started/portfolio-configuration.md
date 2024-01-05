@@ -85,7 +85,7 @@ app.add_portfolio_configuration(
      PortfolioConfiguration(
          market="BITVAVO",
          trading_symbol="EUR",
-         max_unallocated=1000 # Max unallocated amount of EUR, the rest of your balance of eur will be untouched 
+         initial_balance=1000 # Max unallocated amount of EUR, the rest of your balance of eur at the exchange will be untouched 
      )
 )
 ```
