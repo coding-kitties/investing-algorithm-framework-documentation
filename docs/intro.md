@@ -7,9 +7,9 @@ slug: /
 Welcome to the Investing Algorithm Framework documentation! This framework is intended for those who know how to code 
 and allows individuals to create trading bots using historical market data. 
 
-The framework allows you to use your python programming skills to  build complex bots to trade while you sit back and relax. 
-With advanced order types, position handling and performance attribution you can really make all of your biggest 
-and brightest trading ideas a reality.
+The framework allows you to leverage python to build complex bots to trade. 
+The framework aims to implement advanced order types, position handling and performance attribution. Also, the framework
+aims to support multiple data sources, exchanges and brokers. Next to that backtesting and live trading is supported.
 
 ## Features
 * **Backtesting** - Backtest your trading strategies using historical market data.
