@@ -45,6 +45,20 @@ const sidebars = {
         },
         {
             type: 'category',
+            label: 'Data',
+            items: [
+                {
+                    type: 'doc',
+                    id: 'data/market-data-sources',
+                },
+                {
+                    type: 'doc',
+                    id: 'data/multiple-market-data-sources',
+                },
+            ],
+        },
+        {
+            type: 'category',
             label: 'Advanced Concepts',
             items: [
                 {
