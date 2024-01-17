@@ -49,11 +49,11 @@ const sidebars = {
             items: [
                 {
                     type: 'doc',
-                    id: 'data/market-data-sources',
+                    id: 'Data/market-data-sources',
                 },
                 {
                     type: 'doc',
-                    id: 'data/multiple-market-data-sources',
+                    id: 'Data/multiple-market-data-sources',
                 },
             ],
         },
