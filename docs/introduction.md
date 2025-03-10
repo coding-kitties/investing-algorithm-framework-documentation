@@ -4,16 +4,15 @@ slug: /
 ---
 
 # Introduction
-Welcome to the Investing Algorithm Framework documentation! This framework is intended for those who know how to code 
-and allows individuals to create trading bots using historical market data. 
+Welcome to the Investing Algorithm Framework documentation! 
 
 The framework allows you to leverage python to build complex bots to trade. 
-The framework aims to implement advanced order types, position handling and performance attribution. Also, the framework
+The framework aims to implement orders, position, trades and portfolio management. Also, the framework
 aims to support multiple data sources, exchanges and brokers. Next to that backtesting and live trading is supported.
 
 ## Features
-* **Backtesting** - Backtest your trading strategies using historical market data.
-* **Live trading** - Trade live on exchanges using your trading strategies.
+* [Backtesting](docs/Getting%20Started/backtesting) - Backtest your trading strategies using historical market data.
+* [Deployment](docs/Getting%20Started/deployment) - Deploy to Azure or AWS.
 * **Advanced order types** - Use advanced order types such as stop loss and take profit.
 * **Position handling** - Automatically handle your positions.
 * **Performance attribution** - Get insights into the performance of your trading strategies.
@@ -25,7 +24,6 @@ aims to support multiple data sources, exchanges and brokers. Next to that backt
 
 ## Getting Started
 The Investing Algorithm Framework is a Python framework for developing and backtesting investing algorithms.
-For advanced Python users, a lot of the information you find in our documentation is self-explanatory. 
 
 You might also want to check the [quick start guide](/blog/how-to-create-a-trading-bot-in-5-steps) directly which 
 outlines the fundamentals of creating a simple trading bot.
@@ -33,7 +31,7 @@ outlines the fundamentals of creating a simple trading bot.
 After that, you can read the [basics](/docs/Getting%20Started/application-setup.md) to learn more about the framework.
 
 ## What you'll need
-- [python 3 or higher](https://www.python.org/downloads/)
+- [python 3.9 or higher](https://www.python.org/downloads/)
 
 ## Installation
 You can install the framework using the following command:
@@ -47,7 +45,3 @@ If you want to contribute to the framework, please read the [contributing guide]
 
 ### Issues
 If you find a bug or have a feature request, please create an issue on [GitHub](https://github.com/coding-kitties/investing-algorithm-framework/issues).
-
-### Helping with the project roadmap
-If you want to contribute to the project roadmap, please take a look at the [project board](https://github.com/coding-kitties/investing-algorithm-framework/projects?query=is%3Aopen).
-You can pick up a task by assigning yourself to it. 

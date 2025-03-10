@@ -5,75 +5,64 @@ sidebar_position: 2
 ---
 
 # Application Setup
-The framework allows you to configure different application setups. Currently the following configurations are supported:
+The best way to get started with the framework is to create an application through the init cli command.
+You can do this by running the following command in your terminal:
 
-* Stateless (Ideal for cloud functions)
-* Stateful with an in memory database 
-* Stateful with a SQLlite database
-
-Also, the framework can expose a REST api to allow you to interact with your trading bot.
-
-
-## Stateful in-memory Setup
-
-The in-memory setup is the default setup. It is used to run the framework 
-in a single process and without any persistence. This setup is useful for testing and debugging purposes.
-To configure the application with in-memory setup, simply don't pass any arguments to the `create_app` method.
-The following code snippet shows how to do this:
-
-```python
-from investing_algorithm_framework import create_app
-app = create_app()
+```bash
+investing-algorithm-framework init
 ```
 
+This will create the following directory structure:
 
-## Stateless Setup
-To run the framework in a stateless setup, you need to set the stateless flag to `True` when calling the `create_app` method.
-The following code snippet shows how to do this:
-
-:::tip Cloud functions
-Use stateless setup when running the framework in a cloud function such as AWS Lambda or Azure Cloud Functions. You can find
-examples on how to deploy to this cloud environments here: [Cloud functions](https://github.com/coding-kitties/investing-algorithm-framework/tree/master/examples/stateless) 
-:::
-
-
-```python
-from investing_algorithm_framework import create_app
-app = create_app(stateless=True)
+```bash
+.
+├── README.md
+├── app.py
+├── strategies
+│   └── my_trading_strategy.py
+└── gitignore
 ```
 
+The `app.py` file is the main entry point for your application. Ideally, you should only use this file to register your
+strategies, portfolio configurations and market data sources. Its also
+not recommended to add any logic to this file because the framework will use this file to run your application.
 
-## Stateful with a sqllite setup
-To run the framework with a SQLlite setup, you need to specify a resource directory for
-you algorithm to store the database in. The following code snippet specifies the resource directory to 
-the parent directory where the trading bot is running in.
+The `strategies` directory is where you can add your trading strategies. You can create multiple files in this directory
+and add your trading strategies to them. The framework will use this directory to save and link your 
+trading strategies to your backtest runs. This allows you to easily run multiple backtests with different trading strategies 
+and bundle them with your backtest results. 
 
-```python
-import pathlib
-from investing_algorithm_framework import create_app, RESOURCE_DIRECTORY
-# Create the resource directory in the parent directory of the current file
-app = create_app(config={RESOURCE_DIRECTORY: pathlib.Path(__file__).parent.resolve()})
+By default the REST API and UI are disabled. You can enable them by running the init command with the `--web` flag:
+
+```bash
+investing-algorithm-framework init --web
 ```
 
-
-## Rest API plugin
-To run the framework in a rest api setup, you need to specify a port to run the rest api on. 
-The following code snippet shows how to do this:
-
-:::warning Cloud functions
-The REST api plugin is not supported when you run you algorithm in a stateless setup.
-:::
+or you can enable them later by adding the following lines to your `app.py` file:
 
 ```python
+import logging.config
+from dotenv import load_dotenv
 
-from investing_algorithm_framework import create_app
-app = create_app(web=True)
-```
+from investing_algorithm_framework import create_app, DEFAULT_LOGGING_CONFIG
 
-Or if you want to specify the port you can specify this in the config class.
+load_dotenv()
+logging.config.dictConfig(DEFAULT_LOGGING_CONFIG)
 
-```python
+app = create_app(
+    web=True,  # Enable the REST API and UI
+)
 
-from investing_algorithm_framework import create_app, REST_API_PORT
-app = create_app({REST_API_PORT: 3000}, web=True)
+# Register your trading strategies here
+...
+
+# Register your market data sources here
+...
+
+# Register your portfolio configurations here
+...
+
+# Run the app
+if __name__ == "__main__":
+    app.run()
 ```

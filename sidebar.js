@@ -1,6 +1,7 @@
 const sidebars = {
     defaultSideBar: [
-        "intro",
+        "introduction",
+        "contributing",
         {
             type: 'category',
             label: 'Getting Started',
@@ -23,10 +24,6 @@ const sidebars = {
                 },
                 {
                     type: 'doc',
-                    id: 'Getting Started/market-data',
-                },
-                {
-                    type: 'doc',
                     id: 'Getting Started/orders',
                 },
                 {
@@ -40,6 +37,14 @@ const sidebars = {
                 {
                     type: 'doc',
                     id: 'Getting Started/tasks',
+                },
+                {
+                    type: 'doc',
+                    id: 'Getting Started/backtesting',
+                },
+                {
+                    type: 'doc',
+                    id: 'Getting Started/deployment',
                 },
             ],
         },
